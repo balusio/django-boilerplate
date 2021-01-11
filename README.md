@@ -7,6 +7,7 @@ Nginx
 Docker and Docker compose
 
 # ENVIRONMENTS:
+(use .env file)
 
 *Variables:*
 - SECRET_KEY 
@@ -18,6 +19,10 @@ secret_key (create it and use it on your local)
 - ALLOWED_HOSTS host allowed to use on your environment
 
 you can check more about enviroment and how to prepare this app to deploy [here](https://www.youtube.com/watch?v=nh1ynJGJuT8)
+
+## Commands
+Django allow you to use submodule commands extending the `BaseCommand` class, be aware that you need to add this under the folder structure off management/commands under your app !
+
 # running local:
 ```- docker-compose --env-file .env up``` will use the local docker-compose.yml
 
