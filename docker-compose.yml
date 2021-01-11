@@ -8,8 +8,20 @@ services:
       - "8000:8000"
     volumes:
       - ./app:/app
+    command: sh -c "python manage.py makemigrations"
+    command: sh -c "python manage.py migrate"
+    command: sh -c "python manage.py initadmin"
     command: sh -c "python manage.py runserver 0.0.0.0:8000"
     environment: 
-      - DEBUG=1
+      - DEBUG=${DEBUG}
       - SECRET_KEY=${SECRET_KEY}
       - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    environment: 
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - ./dbvolumes:/var/lib/postgresql/data
