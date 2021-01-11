@@ -4,12 +4,15 @@ services:
   app:
     build:
       context: .
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./app:/app
-    command: sh -c "python manage.py runserver 0.0.0.0:8000"
     environment: 
-      - DEBUG=1
       - SECRET_KEY=${SECRET_KEY}
       - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+    
+  proxy:
+    build:
+      context: ./proxy
+    ports:
+      - "8080:8080"
+    depends_on: 
+      - app
+    
